@@ -1,0 +1,174 @@
+body {
+  background-color: get-palette(bg);
+  color: get-palette(fg);
+}
+
+html,
+body,
+input,
+select,
+textarea,
+button {
+  font-family: get-font(family);
+  font-size: 16px;
+  font-weight: get-font(weight);
+  line-height: 1.3;
+}
+
+a {
+  color: get-palette(highlight, 1);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color get-duration(medium), border-color get-duration(medium);
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: get-palette(highlight, 1);
+    text-decoration: underline;
+  }
+}
+
+strong,
+b {
+  font-weight: get-font(weight-bold);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+p {
+  margin: 0 0 get-size(element-margin) 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 { // stylelint-disable-line
+  line-height: 1.1;
+  margin: 0 0 get-size(element-margin) 0;
+
+  > a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  > small {
+    display: block;
+    font-family: get-font(family);
+    font-size: 1rem;
+    font-weight: get-font(weight-bold);
+  }
+
+  &.-underlined {
+    border-bottom: solid get-size(border-width) get-palette(highlight, 2);
+    margin-bottom: get-size(element-margin);
+    padding-bottom: 0.5rem;
+  }
+
+  &.-underlined-alt {
+    margin-bottom: (get-size(element-margin) * 0.5);
+
+    ul + &,
+    ol + &,
+    p + & {
+      margin-top: (get-size(element-margin) * 2);
+    }
+
+    &::after {
+      background-color: get-palette(highlight, 4);
+      content: '';
+      display: block;
+      height: 4px;
+      margin-top: 0.75rem;
+      width: 3rem;
+    }
+  }
+
+  &.-inline {
+    display: inline-block;
+  }
+}
+
+h1,
+.h1 {
+  font-family: get-font(family-heading);
+  font-size: 2.75rem;
+  font-weight: get-font(weight-black);
+}
+
+h2,
+.h2 {
+  font-family: get-font(family-heading);
+  font-size: 2.43rem;
+  font-weight: get-font(weight-black);
+  // letter-spacing: 1px;
+}
+
+h3,
+.h3 {
+  font-family: get-font(family-heading);
+  font-size: 2.1rem;
+  font-weight: get-font(weight-black);
+  // letter-spacing: 1px;
+}
+
+h4,
+.h4 {
+  font-family: get-font(family-heading);
+  font-size: 1.75rem;
+  font-weight: get-font(weight-black);
+  // letter-spacing: 1px;
+}
+
+h5,
+.h5 {
+  font-family: get-font(family-heading);
+  font-size: 1.3rem;
+  font-weight: get-font(weight-bold);
+}
+
+h6,
+.h6 {
+  font-size: 1.16rem;
+  font-weight: get-font(weight-bold);
+}
+
+sub {
+  font-size: 0.8em;
+  position: relative;
+  top: 0.5em;
+}
+
+sup {
+  font-size: 0.8em;
+  position: relative;
+  top: -0.5em;
+}
+
+blockquote {
+  border-left: solid (get-size(border-width) * 4) get-palette(border);
+  font-style: italic;
+  margin: 0 0 get-size(element-margin) 0;
+  padding: (get-size(element-margin) / 4) 0 (get-size(element-margin) / 4) get-size(element-margin);
+}
+
+hr {
+  border: 0;
+  border-bottom: solid get-size(border-width) get-palette(border);
+  margin: get-size(element-margin) 0;
+
+  &.major {
+    margin: (get-size(element-margin) * 1.5) 0;
+  }
+}

@@ -1,0 +1,53 @@
+.site-nav-primary {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+
+  > li {
+    padding-left: 0;
+    vertical-align: middle;
+
+    > a {
+      color: inherit;
+      font-weight: get-font(weight-medium);
+      transition: color get-duration(medium);
+
+      &:active,
+      &:focus,
+      &:hover,
+      &[aria-expanded='true'] {
+        color: get-palette(highlight, 1);
+        text-decoration: none;
+      }
+
+      &[aria-current='page'] {
+        font-weight: get-font(weight-bold);
+      }
+    }
+  }
+
+  @include mq($until: lg) {
+    > li {
+      padding: 2rem 0;
+
+      > a {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  @include mq($from: lg) {
+
+    > li {
+      display: inline-block;
+
+      &:not(:last-child) {
+        padding-right: 4rem;
+      }
+    }
+  }
+}

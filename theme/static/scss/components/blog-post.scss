@@ -1,0 +1,29 @@
+.blog-post {
+    margin-bottom: 8rem;
+
+    .intro {
+        color: get-palette(highlight, 3);
+        font-weight: get-font(weight-bold);
+        margin-bottom: 2rem;
+    }
+
+    .content {
+        :first-child::first-letter {
+            float: left;
+            font-size: 4rem;
+            margin: 1.2rem 0.4rem 0 0;
+            line-height: 0.5;
+        }
+
+        font-family: get-font(family-content);
+    }
+
+    .blog-image {
+        border-radius: get-size(border-radius);
+        margin-bottom: 2rem;
+
+        @include mq($from: lg) {
+            margin-bottom: 3rem;
+        }
+    }
+}

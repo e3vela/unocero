@@ -1,0 +1,18 @@
+.site-header {
+  margin: 3rem 0 5rem;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    left: get-size(gutter, normal) * 0.5;
+    position: absolute;
+  }
+
+    @include mq($from: lg) {
+      margin: 4rem 0 5.5rem;
+    }
+}

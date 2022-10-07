@@ -1,0 +1,77 @@
+// All these variables are available in all other stylesheets.
+// See libs/_functions.scss for handy accessors for these maps.
+
+$url-prefix: '../'; // Prefix to all things included via url() (images, fonts, etc)
+
+// stylelint-disable length-zero-no-unit
+/* sass-mq requires units on all breakpoints */
+$mq-breakpoints: (
+  xs:                   390px,
+  sm:                   544px,
+  md:                   768px,
+  lg:                   992px,
+  xl:                   1200px
+);
+// stylelint-enable length-zero-no-unit
+
+$misc: (
+  z-index-base:         10000,
+  columns:              12
+);
+
+$duration: (
+  fast:                 0.1s,
+  medium:               0.2s,
+  slow:                 0.4s
+);
+
+$size: (
+  border-radius:        3px,
+  border-width:         1px,
+  data-list-height:     80vh,
+  element-height:       2.5em,
+  element-margin:       0.9rem,
+  container:            1100px,
+  gutter: (
+    slim:               0.8,
+    normal:             1.5rem,
+    wide:               3rem
+  )
+);
+
+$font: (
+  family:               ('Varta', Arial, Helvetica, sans-serif),
+  family-heading:       ('DM Serif Text', Georgia, serif),
+  family-content:       ('Vollkorn', Georgia, serif),
+  weight:               400,
+  weight-medium:        500,
+  weight-bold:          700,
+  weight-black:         900,
+  weight-light:         200
+);
+
+$palette: (
+  bg:                   #fff,
+  bg-alt:               #ebebeb,
+  bg-dark:              #5a5a5a,
+  fg:                   #333,
+  fg-bold:              #222,
+  fg-light:             #777,
+  border:               rgba(144, 144, 144, 0.25),
+  border-bg:            rgba(144, 144, 144, 0.1),
+  border2:              rgba(144, 144, 144, 0.5),
+  border2-bg:           rgba(144, 144, 144, 0.2),
+  shadow:               #00000014,
+  state: (
+    success:            #5cb85c,
+    info:               #5bc0de,
+    warning:            #f0ad4e,
+    error:              #d9534f
+  ),
+  highlight: (
+    1:                  #D22779,
+    2:                  #612897,
+    3:                  #8898aa,
+    4:                  #828e9a
+  )
+);

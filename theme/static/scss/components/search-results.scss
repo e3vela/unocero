@@ -1,0 +1,27 @@
+.search-results {
+    .no-results {
+        font-size: 3rem;
+        margin: 10rem 0;
+        text-align: center;
+
+        ._icon {
+            @include icon('\f5fc', before) // fa-laptop-code
+            font-size: 4rem;
+        }
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 3rem;
+        margin-bottom: 5rem;
+    }
+
+    .next {
+        @include icon('\f061', after); // arrow-right
+    }
+
+    .previous {
+        @include icon('\f060', before); // arrow-left
+    }
+}

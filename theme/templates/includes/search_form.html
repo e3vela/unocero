@@ -1,0 +1,16 @@
+{# Don't include this template directly, use {% search_form %} from mezzanine_tags #}
+<div class="site-search">
+	<div class="form-wrapper">
+        <form action="{% url 'search' %}">
+            <label for="search-input" class="_visually-hidden">
+                Search for
+            </label>
+            <input id="search-input" name="query" type="search" placeholder="Search for anything" value="{{ request.GET.query }}">
+        </form>
+    </div>
+    <div>
+        <button class="button _icon">
+            <span class="_visually-hidden">Search</span>
+        </button>
+    </div>
+</div>

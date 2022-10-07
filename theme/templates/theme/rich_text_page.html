@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}richtext-page{% endblock %}
+
+{% block content %}
+    <main id="main" class="section-wrapper" role="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2"></div>
+
+                {# Content #}
+                    <div class="col-md-8">
+                        <div class="title-wrapper">
+                            <h1>{{ page.title }}</h1>
+                        </div>
+
+                        {% include_block page.body %}
+                    </div>
+
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+    </main>
+
+    {# Featured blog post #}
+        <div class="blog-post-featured">
+            <div class="container">
+                <div class="message">
+                    Don't miss our featured story
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-10">
+                        <div class="row">
+
+                            {% include "blog/includes/blog_tile.html" with blog_index_page=blog_index_page posts=featured_posts featured_display=True %}
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-1"></div>
+
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}

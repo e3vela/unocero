@@ -1,0 +1,13 @@
+.blog-index-title {
+    font-size: 3rem;
+    margin-bottom: 6rem;
+    line-height: 1;
+    text-align: center;
+
+    .blog-index-group {
+        font-family: get-font(family-heading);
+        font-weight: get-font(weight-bold);
+        font-size: 3.5rem;
+        text-transform: lowercase;
+    }
+}

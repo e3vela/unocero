@@ -1,0 +1,40 @@
+{% load wagtailcore_tags %}
+
+<footer class="site-footer">
+
+	<div class="content">
+
+		{# Content #}
+			<div class="container">
+
+				<ul class="social">
+					<a href="" class="button">
+						<li class="twitter">
+						</li>
+					</a>
+					<a href="" class="button">
+						<li class="facebook">
+						</li>
+					</a>
+
+					<a href="" class="button">
+						<li class="reddit">
+						</li>
+					</a>
+
+					<a href="" class="button">
+						<li class="linkedin">
+						</li>
+					</a>
+
+					<a href="" class="button">
+						<li class="tg">
+						</li>
+					</a>
+				</ul>
+
+				{{ settings.theme.SiteSetting.footer_content|richtext }}
+			</div>
+
+	</div>
+</footer>

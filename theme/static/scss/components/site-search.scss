@@ -1,0 +1,101 @@
+.site-search {
+    align-items: center;
+    display: flex;
+    background-color: get-palette(border);
+    border-radius: 9px;
+
+    .form-wrapper {
+        overflow: hidden;
+        transition: width 0.2s ease;
+        width: 100%;
+
+        @include mq($from: lg) {
+            width: 0px;
+
+            &.-active {
+                width: 15rem;
+
+                & > form {
+                    transform: translateX(1.5rem);
+                }
+            }
+        }
+    }
+
+    form {
+        transform: translateX(0);
+        transition: transform 0.5s ease;
+    }
+
+    input {
+        background: transparent;
+        border: none;
+        border-right-color: transparent;
+        line-height: 0;
+        outline: 0;
+        text-decoration: none;
+        width: 100%;
+
+        &::placeholder {
+            color: get-palette(fg-light) !important;
+            opacity: 0.5;
+        }
+
+        // clears the 'X' from Internet Explorer
+        &::-ms-clear,
+        &::-ms-reveal {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        // clears the 'X' from Chrome
+        &::-webkit-search-decoration,
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+            display: none;
+        }
+
+        @include mq($until: lg) {
+            margin-left: 1rem;
+        }
+    }
+
+    .button {
+        padding: 1rem 1.3rem;
+        @include icon('\f002', before); // fa-magnifying-glass
+
+        &.-active {
+            animation: spin 0.6s linear infinite;
+
+            &::before {
+                // Spinners seems to not be at the center, might try to
+                // fix later
+                content: '\f2f1'; // fa-rotate
+                display: block;
+            }
+        }
+
+        &:hover,
+        &:focus {
+            background-color: transparent;
+        }
+
+        &::before {
+            margin: 0;
+        }
+    }
+
+    @include mq($from: lg) {
+        position: absolute;
+        right: get-size(gutter, normal) * 0.5;
+        top: 2.75rem;
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform:rotate(360deg);
+    }
+}

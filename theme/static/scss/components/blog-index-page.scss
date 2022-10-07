@@ -1,0 +1,38 @@
+.blog-index-page {
+
+    .blog-index {
+        margin-bottom: 6rem;
+
+        .button {
+            display: block;
+            margin: 0 auto;
+
+            @include icon('\f530', after); // fa-glasses
+        }
+    }
+
+    // Loader icon is invisible by default
+    #loader-icon {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(1.5em);
+        transition: opacity 0.2s ease-out 0.1s, transform 0.2s ease-out 0.1s;
+
+        &.-visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        svg {
+            display: block;
+            margin: 0 auto 3rem auto;
+        }
+    }
+
+    .blog-recent {
+        @include mq($from: lg) {
+            margin-bottom: 2rem;
+        }
+    }
+}

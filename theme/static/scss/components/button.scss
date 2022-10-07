@@ -1,0 +1,61 @@
+button,
+input[type='submit'],
+input[type='reset'] {
+  cursor: pointer;
+}
+
+.button { // stylelint-disable-line rscss/class-format
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 9px;
+  color: inherit;
+  font-family: get-font(family);
+  font-weight: get-font(weight-black);
+  letter-spacing: 1px;
+  padding: 0.9em 1.66em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition-duration: get-duration(medium);
+  transition-property: background-color, color, filter;
+
+  &::after {
+    margin-left: 0.35em;
+  }
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: get-palette(border);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &._icon {
+    padding-left: 1.35em;
+
+    &::before {
+      margin-right: 0.5em;
+    }
+
+    &::after {
+      margin-left: 0.5em;
+    }
+  }
+
+  &.-disabled,
+  &.disabled,
+  &:disabled {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  // @include mq($until: sm) {
+  //   display: block;
+  // }
+
+  @include mq($from: sm) {
+    display: inline-block;
+  }
+}

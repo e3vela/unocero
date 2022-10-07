@@ -1,0 +1,61 @@
+{% load static wagtailcore_tags wagtailuserbar %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+        <meta name="description" content="{% block meta_description %}{% endblock %}" />
+
+        <title>
+            {% block title %}
+                {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% wagtail_site as current_site %}
+                {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+            {% endblock %}
+        </title>
+
+        <!-- <link rel="shortcut icon" href="{{ MEDIA_URL }}{{ theme.favicon }}"> -->
+
+        <link rel="stylesheet" type="text/css" href="{% static 'dist/theme.css' %}">
+
+        {% block extra_css %}{% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+
+        {% wagtailuserbar %}
+
+        {# Header #}
+		    {% include "includes/site_header.html" %}
+
+        {# Content #}
+
+            <div class="content">
+
+                {% block content %}
+                <main class="container" role="main">
+                    {% block main %}{% endblock %}
+                </main>
+                {% endblock %}
+
+            </div>
+
+        {# Footer #}
+            {% include "includes/site_footer.html" %}
+
+        {# Scripts #}
+            <script type="text/javascript" src="{% static 'dist/theme.js' %}"></script>
+
+            {% block extra_js %}{% endblock %}
+
+            {# jQuery and Ajax #}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+            <script src="https://kit.fontawesome.com/433b6adf4c.js" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -1,0 +1,66 @@
+.site-nav-wrapper {
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navtoggle {
+    @include icon('\f0c9'); // fa-bars
+
+    display: none;
+
+    @include mq($until: lg) {
+      background-color: get-palette(bg-alt);
+      box-shadow: -1rem 0 2rem -0.8rem rgba(#000, 0.5);
+      color: inherit;
+      display: block;
+      left: 0;
+      padding: 0.5rem 0;
+      position: absolute;
+      text-align: center;
+      text-decoration: none;
+      top: 1rem;
+      transform: translateX(-100%);
+      width: 4rem;
+    }
+
+    &::before {
+      display: block;
+      font-size: 1.5rem;
+      width: 100%;
+    }
+  }
+
+  @include mq($until: lg) {
+    background-color: get-palette(bg-alt);
+    height: 100vh;
+    max-width: 80vw;
+    padding: 0 1rem;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    transition: transform get-duration(medium);
+    width: 26rem;
+    z-index: get-misc(z-index-base);
+
+    .inner {
+      padding: 1.5rem;
+    }
+
+    &.-active {
+      box-shadow: -1rem 0 2rem -1.6rem rgba(#000, 0.5);
+      outline: 0;
+      transform: translateX(0);
+    }
+  }
+
+  @include mq($from: lg) {
+    outline: 0;
+
+    .inner {
+      align-items: flex-end;
+    }
+  }
+}

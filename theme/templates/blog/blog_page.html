@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailadmin_tags %}
+
+{% block body_class %}blog-page{% endblock %}
+
+{% block content %}
+
+    {# Blog post content #}
+        <div class="container">
+            <article class="blog-post">
+                <div class="row">
+
+                    {# Blog info #}
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+
+                            {# Blog category #}
+                                <div class="blog-category">
+                                    <span>
+                                        <a href="{% routablepageurl page.get_parent.specific "category_index" page.category.slug %}">{{ page.category|default_if_none:"" }}</a>
+                                    </span>
+                                </div>
+
+                            {# Blog title #}
+                                <h1 class="title">{{ page.title }}</h1>
+
+                            {# Blog intro #}
+                                <div class="intro">
+                                    <p>{{ page.intro }}</p>
+                                </div>
+
+                            {# Blog author and date #}
+                                <div class="blog-author-date">
+
+                                    {# Blog author #}
+                                        <a class="blog-author-name-image" href="https://twitter.com/{{ page.owner.twitter_account }}">
+                                            <img src="{% avatar_url page.owner %}" alt="{{ page.owner.get_full_name }}" />
+                                            <div class="blog-author">
+                                                <span class="author-name">by <b>{{ page.owner.get_full_name }}</b></span>
+                                            </div>
+                                        </a>
+
+                                    {# Blog date #}
+                                        <div class="blog-date">
+                                            {{ page.date|date:"j F, Y" }}
+                                        </div>
+
+                                </div>
+
+                        </div>
+                        <div class="col-md-3"></div>
+
+                    {# Blog main image #}
+                        <div class="col-md-12">
+                            {% image page.main_image fill-1200x700 class="blog-image" %}
+                        </div>
+
+                    {# Social links #}
+                        <div class="col-md-3">
+                            <ul class="blog-social-links">
+                                <a href="http://twitter.com/share?text={{ page.title }}&url={{ page.get_full_url }}" class="button" aria-label="Share on Twitter">
+                                    <li class="twitter"></li>
+                                </a>
+
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.get_full_url }}" class="button" target="_blank" aria-label="Share on Facebook">
+                                    <li class="facebook"></li>
+                                </a>
+
+                                <button class="button" data-copy-link="{{ page.get_full_url }}" aria-label="Copy Link">
+                                    <li class="link"></li>
+                                </button>
+
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="content">
+                                {{ page.body|richtext }}
+                            </div>
+
+                        </div>
+                        <div class="col-md-3"></div>
+
+                </div>
+            </article>
+        </div>
+
+    {# Featured blog post #}
+        <div class="blog-post-featured">
+            <div class="container">
+                <div class="message">
+                    Don't miss our featured story
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-10">
+                        <div class="row">
+
+                            {% include "blog/includes/blog_tile.html" with blog_index_page=blog_index_page posts=featured_posts featured_display=True %}
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-1"></div>
+
+                </div>
+            </div>
+        </div>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+<script>
+
+    (function() {
+        const socialLinks = document.querySelector('.blog-social-links');
+        const blogContent = document.querySelector('.blog-post .content');
+
+        const copyLinkElement = document.querySelector('[data-copy-link]');
+        const targetURL = copyLinkElement.getAttribute('data-copy-link');
+        // const tooltip = document.querySelector('.blog-social-links .button');
+
+        // Detect scrolling past social links and add class
+        window.addEventListener('scroll', function(event) {
+            if (socialLinks.offsetTop - window.pageYOffset <= 0) {
+                socialLinks.classList.add('-is-active');
+            }
+
+            // Remove class only when we know for sure that we are at
+            // the top of the blog content
+            if (blogContent.offsetTop - window.pageYOffset >= 70) {
+                if (socialLinks.classList.contains('-is-active')) {
+                    socialLinks.classList.remove('-is-active');
+                }
+            }
+        });
+
+        // Copy absolute URL to clipboard
+        copyLinkElement.addEventListener('click', function(event) {
+
+            // Clipboard API not available
+            if (!navigator.clipboard) {
+               return;
+            }
+
+            try {
+                navigator.clipboard.writeText(targetURL);
+
+                // Update the tooltip text
+                copyLinkElement.ariaLabel = 'Copied!';
+            } catch (err) {
+                copyLinkElement.ariaLabel = 'Failed to copy!';
+            }
+
+            setTimeout(function () {
+                copyLinkElement.ariaLabel = 'Copy Link';
+            }, 1200);
+        });
+    })()
+
+</script>
+{% endblock extra_js %}

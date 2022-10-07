@@ -1,0 +1,48 @@
+/// Makes an element's pseudoelement a FontAwesome icon.
+/// @param {string} $content Optional content value to use.
+/// @param {string} $element Optional use the before or after pseudoelement.
+@mixin icon($content: false, $element: before) {
+  text-decoration: none;
+
+  &:#{$element} {
+    @if $content {
+      content: $content;
+    }
+
+    font-family: FontAwesome;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none !important;
+  }
+
+  &:active,
+  &:focus,
+  &:hover {
+    &:#{$element} {
+      text-decoration: none;
+    }
+  }
+
+  // Don't show the icons until FontAwesome has loaded
+  .fa-events-icons-loading &:#{$element} {  // stylelint-disable-line
+    visibility: hidden;
+  }
+}
+
+/// Applies padding to an element, taking the current element-margin value into account.
+/// @param {mixed} $tb Top/bottom padding.
+/// @param {mixed} $lr Left/right padding.
+/// @param {list} $pad Optional extra padding (in the following order top, right, bottom, left)
+@mixin padding($tb, $lr, $pad: (0, 0, 0, 0)) {
+  padding: ($tb + nth($pad, 1)) ($lr + nth($pad, 2)) max(0.1rem, $tb - get-size(element-margin) + nth($pad, 3)) ($lr + nth($pad, 4));
+}
+
+@mixin filter-lighten {
+  filter: brightness(115%) saturate(100%);
+}
+
+@mixin filter-darken {
+  filter: brightness(85%) saturate(125%);
+}

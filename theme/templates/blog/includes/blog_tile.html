@@ -1,0 +1,91 @@
+{% load wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailadmin_tags %}
+
+
+{% for post in posts %}
+{% with post=post.specific %}
+
+    <div class="{% if featured_display and forloop.counter0 == 0 %}col-md-12{% elif featured_display and forloop.counter0 == 1 or featured_display and forloop.counter0 == 2 %}col-md-6{% else %} col-md-6 col-lg-4{% endif %}">
+
+        {# Content of blog tile #}
+            <div class="blog-tile{% if is_paginated %} -is-injected{% endif %}">
+
+                {% if featured_display and forloop.counter0 == 0 %}
+                <div class="row">
+                    <div class="col-md-6">
+                {% endif %}
+
+                {# Image wrapper #}
+                    <div class="blog-image-wrapper">
+                        <a href="{% pageurl post %}">
+                            {% if featured_display and forloop.counter0 == 0 %}
+                                {% image post.main_image fill-800x800 %}
+                            {% else %}
+                                {% image post.main_image fill-800x450 %}
+                            {% endif %}
+                        </a>
+                    </div>
+
+                {% if featured_display and forloop.counter0 == 0 %}
+                    </div>
+
+                    <div class="col-md-6 {% if featured_display and forloop.counter0 == 0 %}big-title{% endif%}">
+                {% endif %}
+
+                    {# Category #}
+                        {% if post.category %}
+                        <div class="blog-category">
+                            <span>
+                                <a href="{% routablepageurl blog_index_page "category_index" post.category.slug %}">
+                                    {{ post.category }}
+                                </a>
+                            </span>
+                        </div>
+                        {% endif %}
+
+                    {# Title #}
+                        <a class="blog-title-intro" href="{% pageurl post %}">
+                            {% if featured_display and forloop.counter0 == 0 %}
+                                <h1>{{ post.title }}</h1>
+                            {% else %}
+                                <h4>{{ post.title }}</h4>
+                            {% endif %}
+                            <div class="blog-intro">
+                                <p>{{ post.intro }}</p>
+                            </div>
+                        </a>
+
+                    {# Blog author and date #}
+                        {% if featured_display and forloop.counter0 == 0 %}
+                        <div class="blog-author-date">
+
+                            {# Blog author #}
+                                <a class="blog-author-name-image" href="https://twitter.com/{{ post.owner.twitter_account }}">
+                                    <img src="{% avatar_url post.owner %}" alt="{{ post.owner.get_full_name }}" />
+                                    <div class="blog-author">
+                                        <span class="author-name">by <b>{{ post.owner.get_full_name }}</b></span>
+                                    </div>
+                                </a>
+`
+                            {# Blog date #}
+                                <div class="blog-date">
+                                    {{ post.date|date:"j F, Y" }}
+                                </div>
+
+                        </div>
+                        {% endif %}
+
+                {% if featured_display and forloop.counter0 == 0 %}
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+
+    </div>
+
+{% endwith %}
+{% endfor %}
+
+{% if is_paginated and not posts.has_next %}
+	<div data-load-more-finished style="display: none;"></div>
+{% endif %}

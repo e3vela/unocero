@@ -1,0 +1,39 @@
+{% load wagtailimages_tags wagtailcore_tags menu_tags %}
+
+<div class="site-header">
+	<div class="container">
+
+		{# Logo #}
+			<a class="logo" href="/">
+				{% image settings.theme.SiteSetting.logo fill-70x70 %}
+			</a>
+
+		{# This div is here just to center the elements inside the parent div #}
+		{# since the logo and the search buttons are absolute positioned #}
+		<div></div>
+
+		<div id="site-nav" class="site-nav-wrapper">
+
+			{# Nav toggle #}
+				<a data-toggle="#site-nav" class="navtoggle"></a>
+
+			<div class="inner">
+
+				{# Navigation #}
+					<nav class="site-nav">
+						{% main_menu template="menus/main_menu.html" %}
+					</nav>
+			</div>
+
+			{# Site search #}
+				{% include "includes/search_form.html" %}
+
+		</div>
+
+		{# This div is here just to center the elements inside the parent div #}
+		{# since the logo and the search buttons are absolute positioned #}
+		<div></div>
+
+	</div>
+
+</div>

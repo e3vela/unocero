@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}blog-index-page{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="blog-index">
+
+            {# Blog category #}
+                {% if category_name %}
+                <div class="blog-index-title">
+                    You are visiting our beloved category
+                    <div class="blog-index-group">{{ category_name }}</div>
+                </div>
+                {% endif %}
+
+            {# Recent posts #}
+                <div class="blog-recent row" id="blog-post-index">
+                    {% include "blog/includes/blog_tile.html" with posts=posts featured_display=featured_display %}
+                </div>
+
+                <div id="loader-icon">
+                    {% include "blog/includes/loader_icon.html" %}
+                </div>
+
+                {% if can_paginate %}
+                <button class="button _icon" data-load-more="#blog-post-index" aria-label="Load more">
+                    Load More
+                </button>
+                {% endif %}
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+{% block extra_js %}
+
+<script>
+    (function(){
+        const loadMoreButton = document.querySelector('[data-load-more]');
+
+        if (loadMoreButton === null) return
+
+        const loadMoreTarget = document.querySelector(loadMoreButton.getAttribute('data-load-more'));
+        const loaderIcon = document.getElementById("loader-icon");
+
+        // Header required for Django's request.is_ajax() to return True
+        const headers = new Headers({ 'X-Requested-With': 'XMLHttpRequest' });
+
+        // Request more contentn when the button is clicked
+        let page = 1;
+        const url = new URL(window.location);
+
+        loadMoreButton.addEventListener('click', function(event) {
+            // Append page argument to request
+            url.searchParams.set('page', page);
+
+            // Show loading icon
+            loaderIcon.classList.add("-visible");
+
+            // Temporarily disable button while loading
+            loadMoreButton.disabled = true
+
+            fetch(url.href, { headers: headers })
+                .then(function(response) {
+                    if (!response.ok) return Promise.reject(response)
+                    return response.text()
+                })
+                .then(function(text) {
+                    // Append new content to the end of loadMoreTarget
+                    loadMoreTarget.insertAdjacentHTML('beforeend', text);
+
+                    // Detect if all elements have been loaded by checking for a special
+                    // <div> in the response.
+                    const isDone = loadMoreTarget.querySelector('[data-load-more-finished]')
+                    if (isDone) {
+                        loadMoreButton.textContent = "That's all!"
+                    } else {
+                        loadMoreButton.disabled = false
+                    }
+
+                    // Hide loading icon
+                    if (loaderIcon.classList.contains('-visible')) {
+                        loaderIcon.classList.remove("-visible");
+                    }
+                })
+                .catch(function(error) {
+                    // Provide basic feedback if an error occurs
+                    loadMoreButton.disabled = true
+                    loadMoreButton.textContent = 'An error occurred'
+                });
+
+            page++;
+        });
+    })()
+
+</script>
+
+{% endblock extra_js %}

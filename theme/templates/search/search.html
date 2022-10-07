@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block body_class %}search-results{% endblock %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div class="blog-index-title">
+            You searched for
+            <div class="blog-index-group">{{ search_query|safe }}</div>
+        </div>
+
+        {% if search_results %}
+            <div class="blog-recent row" id="blog-post-index">
+                {% include "blog/includes/blog_tile.html" with posts=search_results featured_display=False %}
+            </div>
+
+            {% if search_results.has_previous or search_results.has_next %}
+            <div class="pagination">
+                {% if search_results.has_previous %}
+                <a class="previous button _icon" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
+                {% else %}
+                <div></div>
+                {% endif %}
+
+                {% if search_results.has_next %}
+                <a class="next button _icon" href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        {% elif search_query %}
+            <div class="no-results">
+                Woops, we couldn't find anything
+
+                <div class="_icon"></div>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
