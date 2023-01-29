@@ -1,5 +1,5 @@
 {# Don't include this template directly, use {% search_form %} from mezzanine_tags #}
-<div class="site-search">
+<div class="site-search {{site_search_class}}">
 	<div class="form-wrapper">
         <form action="{% url 'search' %}">
             <label for="search-input" class="_visually-hidden">

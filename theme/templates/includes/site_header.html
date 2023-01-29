@@ -8,10 +8,6 @@
 				{% image settings.theme.SiteSetting.logo fill-70x70 %}
 			</a>
 
-		{# This div is here just to center the elements inside the parent div #}
-		{# since the logo and the search buttons are absolute positioned #}
-		<div></div>
-
 		<div id="site-nav" class="site-nav-wrapper">
 
 			{# Nav toggle #}
@@ -26,13 +22,12 @@
 			</div>
 
 			{# Site search #}
-				{% include "includes/search_form.html" %}
+				{% include "includes/search_form.html" with site_search_class="inside-site-nav" %}
 
 		</div>
 
-		{# This div is here just to center the elements inside the parent div #}
-		{# since the logo and the search buttons are absolute positioned #}
-		<div></div>
+		{# Site search #}
+			{% include "includes/search_form.html" with site_search_class="outside-site-nav" %}
 
 	</div>
 

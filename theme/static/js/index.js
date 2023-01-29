@@ -8,4 +8,4 @@ const activeClass = '-active';
 initSiteNav("#site-nav", activeClass)
 
 // Search form
-initSearchForm('.site-search button', '.form-wrapper', activeClass);
+initSearchForm('.site-search:visible', 'button', '.form-wrapper', activeClass);

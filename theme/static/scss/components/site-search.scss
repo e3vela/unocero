@@ -1,6 +1,5 @@
 .site-search {
     align-items: center;
-    display: flex;
     background-color: get-palette(border);
     border-radius: 9px;
 
@@ -8,15 +7,35 @@
         overflow: hidden;
         transition: width 0.2s ease;
         width: 100%;
+    }
+
+    &.inside-site-nav {
+        display: flex;
+        opacity: 1;
 
         @include mq($from: lg) {
-            width: 0px;
+            display: none;
+            opacity: 0;
+        }
+    }
 
-            &.-active {
-                width: 15rem;
+    &.outside-site-nav {
+        display: none;
+        opacity: 0;
 
-                & > form {
-                    transform: translateX(1.5rem);
+        @include mq($from: lg) {
+            display: flex;
+            opacity: 1;
+
+            .form-wrapper{
+                width: 0px;
+
+                &.-active {
+                    width: 15rem;
+
+                    & > form {
+                        transform: translateX(1.5rem);
+                    }
                 }
             }
         }
@@ -85,12 +104,6 @@
         &::before {
             margin: 0;
         }
-    }
-
-    @include mq($from: lg) {
-        position: absolute;
-        right: get-size(gutter, normal) * 0.5;
-        top: 2.75rem;
     }
 }
 

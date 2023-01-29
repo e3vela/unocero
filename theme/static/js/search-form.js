@@ -1,6 +1,6 @@
-export default function initSearchForm(searchToggleSelector, formWrapperSelector, activeClass) {
-    const searchToggle = document.querySelector(searchToggleSelector);
-    const searchWrapper = document.querySelector(formWrapperSelector);
+export default function initSearchForm(searchSelector, toggleSelector, formWrapperSelector, activeClass) {
+    const toggleElement = $(searchSelector + ' ' + toggleSelector)[0];
+    const searchWrapper = $(searchSelector + ' ' + formWrapperSelector)[0];
     const searchForm = searchWrapper.querySelector('form')
     const searchInput = searchWrapper.querySelector('input');
 
@@ -12,14 +12,12 @@ export default function initSearchForm(searchToggleSelector, formWrapperSelector
       });
 
     // Open form when user clicks on button
-    searchToggle.addEventListener('click', function() {
+    toggleElement.addEventListener('click', function() {
 
         if (searchWrapper.classList.contains(activeClass)) {
             searchWrapper.classList.remove(activeClass);
         } else {
             searchWrapper.classList.add(activeClass);
-
-            console.log(window.innerWidth);
 
             // Only focus when the site nav is not a side bar anymore
             if (window.innerWidth > 992) {
@@ -53,8 +51,8 @@ export default function initSearchForm(searchToggleSelector, formWrapperSelector
     // Change icon when form has been submitted
     searchForm.addEventListener('submit', function() {
         // Add class to button so icon can be changed
-        if (!searchToggle.classList.contains(activeClass)) {
-            searchToggle.classList.add(activeClass);
+        if (!toggleElement.classList.contains(activeClass)) {
+            toggleElement.classList.add(activeClass);
         }
     });
 
