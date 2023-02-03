@@ -16,6 +16,8 @@ except ImportError:
 
     DEBUG = os.getenv("DEBUG", "False") == "True"
 
+    DATABASE_URL = os.getenv("DATABASE_URL")
+
     DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+        "default": dj_database_url.config(),
     }
