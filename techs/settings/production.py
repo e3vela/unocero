@@ -19,5 +19,3 @@ except ImportError:
     DATABASES = {
         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
-
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
