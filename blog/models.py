@@ -2,11 +2,13 @@ from django.db import models
 from django.core.paginator import Paginator
 from django.utils.text import slugify
 
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.core import blocks
 from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
+from wagtail.core.fields import StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
@@ -127,7 +129,13 @@ class BlogIndexPage(RoutablePageMixin, Page):
 class BlogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
+
+    body = StreamField([
+        ("heading", blocks.CharBlock(form_classname="full title")),
+        ("paragraph", blocks.RichTextBlock()),
+        ("image", ImageChooserBlock()),
+    ])
+
     category = models.ForeignKey(
         "BlogCategory", null=True, blank=True,
         on_delete=models.SET_NULL, related_name="blog_category",
@@ -148,7 +156,7 @@ class BlogPage(Page):
             FieldPanel("category"),
         ], heading="Blog information"),
         FieldPanel("intro"),
-        FieldPanel("body"),
+        StreamFieldPanel("body"),
         ImageChooserPanel("main_image"),
     ]
 
