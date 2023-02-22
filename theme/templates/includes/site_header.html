@@ -21,13 +21,21 @@
 					</nav>
 			</div>
 
-			{# Site search #}
+			{# Site search for mobile #}
 				{% include "includes/search_form.html" with site_search_class="inside-site-nav" %}
 
 		</div>
 
-		{# Site search #}
-			{% include "includes/search_form.html" with site_search_class="outside-site-nav" %}
+		{# Inserting div to make sure to have an even navbar, since .site-actions should be #}
+		{# absolute positioned #}
+		<div></div>
+
+		<div class="site-actions">
+			<button class="button dark-theme-toggle" aria-label="Light/Dark theme"></button>
+
+			{# Site search for not mobile #}
+				{% include "includes/search_form.html" with site_search_class="outside-site-nav" %}
+		</div>
 
 	</div>
 

@@ -1,7 +1,8 @@
 .site-search {
     align-items: center;
-    background-color: get-palette(border);
+    background-color: get-palette(bg-alt);
     border-radius: 9px;
+    z-index: 1;
 
     .form-wrapper {
         overflow: hidden;

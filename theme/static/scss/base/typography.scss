@@ -1,6 +1,35 @@
 body {
   background-color: get-palette(bg);
   color: get-palette(fg);
+
+  &.dark-theme {
+    background-color: get-palette(fg);
+    color: get-palette(bg);
+
+    .intro, .blog-intro {
+      color: get-palette(bg);
+    }
+
+    .blog-date {
+      color: get-palette(bg);
+    }
+
+    .site-search {
+      background-color: get-palette(bg-dark);
+
+      input {
+        color: get-palette(bg);
+
+        &::placeholder {
+          color: get-palette(bg) !important;
+        }
+      }
+    }
+
+    .blog-post-featured {
+      background-color: get-palette(fg-bold);
+    }
+  }
 }
 
 html,
