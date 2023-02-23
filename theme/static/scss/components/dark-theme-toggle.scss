@@ -1,0 +1,17 @@
+.dark-theme-toggle {
+    display: flex;
+    right: 4rem;
+    position: absolute;
+    padding: 1rem 1.3rem;
+    transition: transform 0.3s ease;
+
+    @include icon('\f042', before);  // fa-circle-half-stroke
+
+    &.-active {
+        transform: rotate(180deg);
+    }
+
+    &:active, &:focus, &:hover {
+        background-color: transparent;
+    }
+}

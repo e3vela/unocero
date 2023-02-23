@@ -7,16 +7,4 @@
     justify-content: space-between;
     position: relative;
   }
-
-  .dark-theme-toggle {
-    right: 4rem;
-    position: absolute;
-    padding: 1rem 1.3rem;
-
-    @include icon('\f042', before);  // fa-circle-half-stroke
-
-    &:active, &:focus, &:hover {
-      background-color: transparent;
-    }
-  }
 }

@@ -3,5 +3,6 @@ export default function initDarkThemeToggle(darkThemeToggle) {
 
     toggle.addEventListener("click", function() {
         document.body.classList.toggle('dark-theme');
+        toggle.classList.toggle("-active");
     });
 }
