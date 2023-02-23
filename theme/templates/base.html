@@ -28,6 +28,13 @@
 
     <body class="{% block body_class %}{% endblock %}">
 
+        {# Activation of dark theme if available #}
+        <script>
+            if (localStorage.getItem('isDarkThemeSelected') === 'true') {
+                document.body.classList.add('dark-theme');
+            }
+        </script>
+
         {% wagtailuserbar %}
 
         {# Header #}

@@ -1,8 +1,6 @@
-// import houdini from "houdinijs"
-
 export default function initSiteNav(selector, activeClass) {
-  const siteNav = document.querySelector(selector)
-  const toggle = document.querySelector(`[data-toggle="#${siteNav.id}"]`)
+  const siteNav = document.querySelector(selector);
+  const toggle = document.querySelector(`[data-toggle="#${siteNav.id}"]`);
 
 
   // Close the drawer when ESC is pressed and no submenu is open
@@ -14,7 +12,14 @@ export default function initSiteNav(selector, activeClass) {
     if (!siteNav.classList.contains(activeClass)) return
 
     siteNav.classList.remove(activeClass);
-  })
+  });
+
+  // Close the drawer when clicking outside of the menu
+  document.addEventListener("click", event => {
+    if (!siteNav.contains(event.target)) {
+      siteNav.classList.remove(activeClass);
+    }
+  });
 
   toggle.addEventListener("click", function() {
 
@@ -24,12 +29,4 @@ export default function initSiteNav(selector, activeClass) {
         siteNav.classList.add(activeClass);
     }
   });
-
-  // Update the [aria-expanded] attribute on the toggle
-//   siteNav.addEventListener("open.houdini", () => {
-//     toggle.setAttribute("aria-expanded", true)
-//   })
-//   siteNav.addEventListener("close.houdini", () => {
-//     toggle.setAttribute("aria-expanded", false)
-//   })
 }
