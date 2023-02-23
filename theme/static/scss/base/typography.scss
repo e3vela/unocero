@@ -29,6 +29,16 @@ body {
     .blog-post-featured {
       background-color: get-palette(fg-bold);
     }
+
+    .site-nav-wrapper {
+      @include mq($until: lg) {
+        background-color: get-palette(fg-bold);
+
+        .navtoggle {
+            background-color: get-palette(fg-bold);
+          }
+      }
+    }
   }
 }
 

@@ -80,7 +80,11 @@
                             </div>
 
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <ul class="blog-content-right-">
+                                <button class="button dark-theme-toggle outside-site-nav" aria-label="Light/Dark theme"></button>
+                            </ul>
+                        </div>
 
                 </div>
             </article>
@@ -122,7 +126,6 @@
 
         const copyLinkElement = document.querySelector('[data-copy-link]');
         const targetURL = copyLinkElement.getAttribute('data-copy-link');
-        // const tooltip = document.querySelector('.blog-social-links .button');
 
         // Detect scrolling past social links and add class
         window.addEventListener('scroll', function(event) {

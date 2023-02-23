@@ -11,6 +11,7 @@
     }
 
     &.inside-site-nav {
+        background-color: get-palette(bg);
         display: flex;
         opacity: 1;
 

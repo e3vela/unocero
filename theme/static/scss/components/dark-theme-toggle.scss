@@ -1,17 +1,46 @@
 .dark-theme-toggle {
-    display: flex;
+    display: none;
     right: 4rem;
+    opacity: 0;
     position: absolute;
     padding: 1rem 1.3rem;
-    transition: transform 0.3s ease;
 
     @include icon('\f042', before);  // fa-circle-half-stroke
 
-    &.-active {
+    &::before {
+        transition: transform 0.3s ease;
+    }
+
+    &.-active::before {
         transform: rotate(180deg);
     }
 
     &:active, &:focus, &:hover {
         background-color: transparent;
+    }
+
+    &.inside-site-nav {
+        @include mq($until: lg) {
+            align-items: baseline;
+            display: flex;
+            font-size: 1.2rem;
+            margin: 0 auto;
+            padding: 0;
+            position: static;
+            opacity: 1;
+        }
+
+        &::before {
+            margin-right: 0.5rem;
+        }
+    }
+
+    &.outside-site-nav {
+        position: static;
+
+        @include mq($from: lg) {
+            display: flex;
+            opacity: 1;
+        }
     }
 }
