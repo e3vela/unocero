@@ -8,14 +8,15 @@
     }
 
     .content {
-        :first-child::first-letter {
-            float: left;
-            font-size: 4rem;
-            margin: 1.2rem 0.4rem 0 0;
-            line-height: 0.5;
-        }
-
         font-family: get-font(family-content);
+        margin-bottom: 4rem;
+    }
+
+    .block-paragraph:first-of-type p:first-child::first-letter {
+        float: left;
+        font-size: 4rem;
+        margin: 1.2rem 0.4rem 0 0;
+        line-height: 0.5;
     }
 
     .blog-image {
