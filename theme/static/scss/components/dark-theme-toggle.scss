@@ -36,7 +36,7 @@
     }
 
     &.outside-site-nav {
-        position: static;
+        position: absolute;
 
         @include mq($from: lg) {
             display: flex;

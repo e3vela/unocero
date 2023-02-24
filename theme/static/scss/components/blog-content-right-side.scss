@@ -1,4 +1,6 @@
 .blog-content-right-side {
-    display: flex;
-    justify-content: center;
+
+    .dark-theme-toggle.outside-site-nav {
+        position: static;
+    }
 }
