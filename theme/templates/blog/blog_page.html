@@ -97,7 +97,7 @@
                             {# Show image block at the center  #}
                             <div class="col-md-1"></div>
                             <div class="col-md-10">
-                                {% image block.value width-1400 class="blog-image" %}
+                                {% image block.value fill-1200x650 class="blog-image" %}
                             </div>
                             <div class="col-md-1"></div>
 
@@ -107,7 +107,7 @@
                                 <div class="content">
 
                         {% else %}
-                            <div class="block-{{ block.block_type }}">
+                            <div class="block-{{ block.block_type }}{% if forloop.counter == 2 %} -first{% endif %}">
                                 {% include_block block %}
                             </div>
                         {% endif %}
