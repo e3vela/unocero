@@ -94,25 +94,43 @@
 <script>
 
     (function() {
-        const socialLinks = document.querySelector('.blog-social-links');
+        const socialLinksClass = '.blog-social-links';
+        const hiddenClass = '-hidden';
+
+        const socialLinks = document.querySelector(socialLinksClass);
+        const extraSociaLinks = document.querySelectorAll(socialLinksClass + '.' + hiddenClass);
         const blogContent = document.querySelector('.blog-post .content');
 
         const copyLinkElement = document.querySelector('[data-copy-link]');
         const targetURL = copyLinkElement.getAttribute('data-copy-link');
 
+        const stickyClass = '-sticky';
+
         // Detect scrolling past social links and add class
         window.addEventListener('scroll', function(event) {
+            // Add the sticky class when social links are at the top of the screen
             if (socialLinks.offsetTop - window.pageYOffset <= 0) {
-                socialLinks.classList.add('-is-active');
+                socialLinks.classList.add(stickyClass);
             }
 
             // Remove class only when we know for sure that we are at
             // the top of the blog content
             if (blogContent.offsetTop - window.pageYOffset >= 70) {
-                if (socialLinks.classList.contains('-is-active')) {
-                    socialLinks.classList.remove('-is-active');
+                if (socialLinks.classList.contains(stickyClass)) {
+                    socialLinks.classList.remove(stickyClass);
                 }
             }
+
+            // Behavior for all extra social links
+            extraSociaLinks.forEach((element) => {
+                if (element.offsetTop - window.pageYOffset <= 600) {
+                    element.classList.remove(hiddenClass);
+                    element.classList.add(stickyClass);
+                } else {
+                    element.classList.add(hiddenClass);
+                    element.classList.remove(stickyClass);
+                }
+            })
         });
 
         // Copy absolute URL to clipboard

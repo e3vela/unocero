@@ -3,15 +3,31 @@
     justify-content: space-evenly;
     list-style-type: none;
     margin-bottom: 2rem;
+    opacity: 1;
     top: 0;
-    transition: top 0.8s ease-out;
+    transition: top 0.8s ease-out, opacity 0.2s, transform 0.4s;
+    transform: translateY(0);
 
-    // Note: toggling of this class is done with JS,
+    // Toggling of this class is done with JS,
     // this class is removed only when the viewport is being scrolled
     // some pixels above the '.blog-post .content' element
-    &.-is-active {
+    &.-sticky {
         position: sticky;
         top: 3rem;
+    }
+
+    // Toggling of this class is done with JS the same as above
+    &.-hidden {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    &.extra {
+        // Completetly hide on mobile
+        @include mq($until: md) {
+            display: none;
+            opacity: 0;
+        }
     }
 
     .button {
