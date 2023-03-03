@@ -133,7 +133,10 @@ class ParagraphBlock(blocks.RichTextBlock):
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context)
         context["is_first_paragraph"] = ParagraphBlock.IS_FIRST_PARAGRAPH
+
+        # Setting this to False so no other paragraph is marked as first
         ParagraphBlock.IS_FIRST_PARAGRAPH = False
+
         return context
 
     class Meta:
@@ -141,12 +144,13 @@ class ParagraphBlock(blocks.RichTextBlock):
 
 
 class BlogBodyBlock(blocks.StreamBlock):
-    heading = blocks.CharBlock(template="blog/blocks/blog_heading.html", form_classname="full title")
     paragraph = ParagraphBlock()
     image = ImageChooserBlock(template="blog/blocks/blog_image.html")
 
     def get_context(self, value, parent_context=None):
+        # Reseting this value to True in case it was set to False
         ParagraphBlock.IS_FIRST_PARAGRAPH = True
+
         return super().get_context(value, parent_context)
 
     class Meta:
