@@ -126,15 +126,38 @@ class BlogIndexPage(RoutablePageMixin, Page):
         verbose_name = "blog index page"
 
 
+class ParagraphBlock(blocks.RichTextBlock):
+
+    IS_FIRST_PARAGRAPH = True
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context)
+        context["is_first_paragraph"] = ParagraphBlock.IS_FIRST_PARAGRAPH
+        ParagraphBlock.IS_FIRST_PARAGRAPH = False
+        return context
+
+    class Meta:
+        template = "blog/blocks/blog_richtext.html"
+
+
+class BlogBodyBlock(blocks.StreamBlock):
+    heading = blocks.CharBlock(template="blog/blocks/blog_heading.html", form_classname="full title")
+    paragraph = ParagraphBlock()
+    image = ImageChooserBlock(template="blog/blocks/blog_image.html")
+
+    def get_context(self, value, parent_context=None):
+        ParagraphBlock.IS_FIRST_PARAGRAPH = True
+        return super().get_context(value, parent_context)
+
+    class Meta:
+        template = 'blog/blocks/blog_body.html'
+
+
 class BlogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
 
-    body = StreamField([
-        ("heading", blocks.CharBlock(form_classname="full title")),
-        ("paragraph", blocks.RichTextBlock()),
-        ("image", ImageChooserBlock()),
-    ])
+    body = StreamField(BlogBodyBlock())
 
     category = models.ForeignKey(
         "BlogCategory", null=True, blank=True,

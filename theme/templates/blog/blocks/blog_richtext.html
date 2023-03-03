@@ -1,0 +1,33 @@
+{% load wagtailcore_tags %}
+
+<div class="col-md-3">
+    {% if is_first_paragraph %}
+    <ul class="blog-social-links">
+        <a href="http://twitter.com/share?text={{ page.title }}&url={{ page.get_full_url }}" class="button" aria-label="Share on Twitter">
+            <li class="twitter"></li>
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.get_full_url }}" class="button" target="_blank" aria-label="Share on Facebook">
+            <li class="facebook"></li>
+        </a>
+        <button class="button" data-copy-link="{{ page.get_full_url }}" aria-label="Copy Link">
+            <li class="link"></li>
+        </button>
+    </ul>
+    {% endif %}
+</div>
+
+<div class="col-md-6">
+    <div class="content{% if is_first_paragraph %} -first{% endif %}">
+        <div class="block-paragraph">
+            {% include_block value %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    {% if is_first_paragraph %}
+    <ul class="blog-content-right-side">
+        <button class="button dark-theme-toggle outside-site-nav" aria-label="Light/Dark theme"></button>
+    </ul>
+    {% endif %}
+</div>

@@ -1,5 +1,5 @@
 .blog-post {
-    margin-bottom: 4rem;
+    margin-bottom: 8rem;
 
     .intro {
         color: get-palette(highlight, 3);
@@ -9,10 +9,9 @@
 
     .content {
         font-family: get-font(family-content);
-        margin-bottom: 4rem;
     }
 
-    .block-paragraph.-first p:first-child::first-letter {
+    .-first .block-paragraph p:first-child::first-letter {
         float: left;
         font-size: 4rem;
         margin: 1.2rem 0.4rem 0 0;

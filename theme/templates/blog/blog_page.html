@@ -56,69 +56,8 @@
                             {% image page.main_image fill-1200x700 class="blog-image" %}
                         </div>
 
-                    {% for block in page.body %}
-
-                        {% if forloop.first %}
-                        {# Social links #}
-                        <div class="col-md-3">
-                            <ul class="blog-social-links">
-                                <a href="http://twitter.com/share?text={{ page.title }}&url={{ page.get_full_url }}" class="button" aria-label="Share on Twitter">
-                                    <li class="twitter"></li>
-                                </a>
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.get_full_url }}" class="button" target="_blank" aria-label="Share on Facebook">
-                                    <li class="facebook"></li>
-                                </a>
-                                <button class="button" data-copy-link="{{ page.get_full_url }}" aria-label="Copy Link">
-                                    <li class="link"></li>
-                                </button>
-                            </ul>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="content">
-                        {% endif %}
-
-                        {% if block.block_type == 'heading' %}
-                            <h2>{{ block.value }}</h2>
-                        {% elif block.block_type == 'image' %}
-                            {# Close the first paragraph's block and .content div #}
-                                    </div>
-                                </div>
-
-                            {# When current paragraph is closed, show dark them toggle #}
-                                <div class="col-md-3">
-                                    {% if forloop.counter == 3 %}
-                                        <ul class="blog-content-right-side">
-                                            <button class="button dark-theme-toggle outside-site-nav" aria-label="Light/Dark theme"></button>
-                                        </ul>
-                                    {% endif %}
-                                </div>
-
-                            {# Show image block at the center  #}
-                            <div class="col-md-1"></div>
-                            <div class="col-md-10">
-                                {% image block.value fill-1200x650 class="blog-image" %}
-                            </div>
-                            <div class="col-md-1"></div>
-
-                            {# Open the left column and content #}
-                            <div class="col-md-3"></div>
-                            <div class="col-md-6">
-                                <div class="content">
-
-                        {% else %}
-                            <div class="block-{{ block.block_type }}{% if forloop.counter == 2 %} -first{% endif %}">
-                                {% include_block block %}
-                            </div>
-                        {% endif %}
-
-                        {% if forloop.last %}
-                            </div>
-                        </div>
-                        <div class="col-md-3"></div>
-                        {% endif %}
-
-                    {% endfor %}
+                    {# Blog body #}
+                        {% include_block page.body %}
 
                 </div>
             </article>
